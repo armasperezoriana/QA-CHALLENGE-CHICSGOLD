@@ -1,0 +1,820 @@
+{
+	"info": {
+		"_postman_id": "59c686be-feb8-4773-8a2a-2bf8dcb2b868",
+		"name": "QA-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39617158"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "CREATE-PRODUCT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful response\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Content type is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response schema is valid\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('array');\r",
+									"    responseData.forEach(function(item) {\r",
+									"        pm.expect(item).to.be.an('object');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('array');\r",
+									"    if(responseData.length > 0){\r",
+									"        pm.expect(responseData[0]).to.be.an('object');\r",
+									"        pm.expect(responseData[0]).to.have.property('name');\r",
+									"        pm.expect(responseData[0]).to.have.property('price');\r",
+									"        pm.expect(responseData[0]).to.have.property('category');\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": "http://localhost:5044/api/Product"
+					},
+					"response": []
+				},
+				{
+					"name": "ADD-PRODUCT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response status code is 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields - id, name, and price\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.have.property('id');\r",
+									"    pm.expect(responseData).to.have.property('name');\r",
+									"    pm.expect(responseData).to.have.property('price');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Id is a non-negative integer\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData.id).to.be.a('number');\r",
+									"  pm.expect(responseData.id).to.be.at.least(0, \"Id should be a non-negative integer\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Name is a non-empty string\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"name\": \"Lol\",\n  \"price\": 100\n}"
+						},
+						"url": "http://localhost:5044/api/Product"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT-PRODUCT-BY-ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 300ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(300);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response body schema is as expected\", function () {\r",
+									"    const responseData = xml2Json(pm.response.text());\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The product has the correct ID \", function () {\r",
+									"    const id = 1;\r",
+									"    pm.expect(id).to.eql(1);\r",
+									"});\r",
+									"\r",
+									"// Add a test to check for the length of the response data\r",
+									"pm.test(\"Response data length must be 0\", function () {\r",
+									"    const responseData = xml2Json(pm.response.text());\r",
+									"    pm.expect(responseData).to.eql(null, \"Response data should be null\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"name\": \"Contra strike\",\n  \"price\": 3000\n}\n\n"
+						},
+						"url": "http://localhost:5044/api/Product/1"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE-PRODUCT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Verify that the DELETE request was successful\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(404);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response successful 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.type).to.exist;\r",
+									"    pm.expect(responseData.title).to.exist;\r",
+									"    pm.expect(responseData.status).to.exist;\r",
+									"    pm.expect(responseData.traceId).to.exist;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Content type is application/problem+json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/problem+json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response schema matches the expected schema\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.have.property('type');\r",
+									"    pm.expect(responseData).to.have.property('title');\r",
+									"    pm.expect(responseData).to.have.property('status');\r",
+									"    pm.expect(responseData).to.have.property('traceId');\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5044/api/Product/1\n"
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5044/api/Product/1\n"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/problem+json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 10 Nov 2024 14:22:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.5\",\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"traceId\": \"00-d809351e488b00ab6618ab37baa11a14-94125f02297eb3b6-00\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This is the product test module where you add, edit, search by id and delete."
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "CREATE-ORDER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the correct content type - application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response is an array\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    pm.expect(responseData).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is within an acceptable range\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Array schema is as expected\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData).to.be.an('array');\r",
+									"  // Add more specific checks for the array schema here\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": "http://localhost:5044/api/Order"
+					},
+					"response": []
+				},
+				{
+					"name": "ADD-ORDER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Fixed TypeError by checking if responseData is not null before accessing its properties\r",
+									"pm.test(\"There is no answer or what you are looking for does not exist.\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response body is null\", function () {\r",
+									"    const responseData = xml2Json(pm.response.text());\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.null;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"The desired order exists - Puzzle\", function () {\r",
+									"    const responseData = xml2Json(pm.response.text());\r",
+									"    if (responseData !== null) {\r",
+									"        pm.expect(responseData.id).to.eql(2);  // Verificar el ID\r",
+									"        pm.expect(responseData.productName).to.eql(\"Puzzle\");  // Verificar el nombre del producto\r",
+									"        pm.expect(responseData.quantity).to.eql(100);  // Verificar la cantidad\r",
+									"        pm.expect(responseData.status).to.eql(\"Agotado\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The desired order exists - Pizza\", function () {\r",
+									"    const responseData = xml2Json(pm.response.text());\r",
+									"    if (responseData !== null) {\r",
+									"        pm.expect(responseData.id).to.eql(2);  // Verificar el ID\r",
+									"        pm.expect(responseData.productName).to.eql(\"Pizza\");  // Verificar el nombre del producto\r",
+									"        pm.expect(responseData.quantity).to.eql(100);  // Verificar la cantidad\r",
+									"        pm.expect(responseData.status).to.eql(\"Despensa\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Exist the order - Legos\", function () {\r",
+									"    const responseData = xml2Json(pm.response.text());\r",
+									"    if (responseData !== null) {\r",
+									"        pm.expect(responseData.id).to.eql(4);  // Verificar el ID\r",
+									"        pm.expect(responseData.productName).to.eql(\"Legos\");  // Verificar el nombre del producto\r",
+									"        pm.expect(responseData.quantity).to.eql(80);  // Verificar la cantidad\r",
+									"        pm.expect(responseData.status).to.eql(\"Vendidos\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Test: Verificar que un producto específico NO exista en la respuesta\r",
+									"pm.test(\"Order does not exist\", function () {\r",
+									"    const responseData = xml2Json(pm.response.text());  // Obtener los datos de la respuesta en formato JSON (array)\r",
+									"\r",
+									"    if (responseData !== null) {\r",
+									"        // Buscar si existe un objeto en el array que coincida con los datos no esperados\r",
+									"        const nonExistentProduct = responseData.find(item => \r",
+									"            item.id === 7 &&\r",
+									"            item.productName === \"Legos\" &&\r",
+									"            item.quantity === 80 &&\r",
+									"            item.status === \"Vendidos\"\r",
+									"        );\r",
+									"\r",
+									"        // Verificar que NO se haya encontrado el producto\r",
+									"        pm.expect(nonExistentProduct, \"Unexpected product found in response\").to.be.undefined;\r",
+									"\r",
+									"        // Mensaje en consola para confirmar que el producto no existe\r",
+									"        if (!nonExistentProduct) {\r",
+									"            console.log(\"Product with ID 7 and name 'Legos' does not exist in the response.\");\r",
+									"        } else {\r",
+									"            console.log(\"Product found:\", nonExistentProduct);\r",
+									"        }\r",
+									"    } else {\r",
+									"        console.log(\"Response data is null. Cannot check for non-existent product.\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"id\":1,\"productName\":\"Juego de mesa\",\"quantity\":10,\"status\":\"Disponible\"},\r\n{\"id\":2,\"productName\":\"Puzzle\",\"quantity\":100,\"status\":\"Agotado\"},\r\n{\"id\":3,\"productName\":\"Uno\",\"quantity\":80,\"status\":\"Agotado\"},\r\n{\"id\":4,\"productName\":\"Legos\",\"quantity\":20,\"status\":\"Vendidos\"},\r\n{\"id\":5,\"productName\":\"Pizza\",\"quantity\":100,\"status\":\"Despensa\"}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5044/api/Order\n"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT-ORDER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Fixed TypeError by checking if responseData is not null before accessing its properties\r",
+									"pm.test(\"There is no answer or what you are looking for does not exist.\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"There are empty orders\", function () {\r",
+									"    const responseData = xml2Json(pm.response.text());\r",
+									"    if (responseData == \"\") {\r",
+									"        pm.expect(responseData.id).to.eql(3);  // Verificar el ID\r",
+									"        pm.expect(responseData.productName).to.eql(\"\");  // Verificar el nombre del producto\r",
+									"        pm.expect(responseData.quantity).to.eql(0);  // Verificar la cantidad\r",
+									"        pm.expect(responseData.status).to.eql(\"\");\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2,\r\n  \"productName\": \"Test\",\r\n  \"quantity\": 30,\r\n  \"status\": \"Esto es una prueba\"\r\n}\r\n{\"id\":1,\"productName\":\"Puzzle\",\"quantity\":100,\"status\":\"Agotado\"},\r\n\r\n{\r\n  \"id\": 3,\r\n  \"productName\": \"\",\r\n  \"quantity\": 0,\r\n  \"status\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5044/api/Order/2\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE-ORDER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Verify that the DELETE request was successful\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(404);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response successful 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.type).to.exist;\r",
+									"    pm.expect(responseData.title).to.exist;\r",
+									"    pm.expect(responseData.status).to.exist;\r",
+									"    pm.expect(responseData.traceId).to.exist;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Content type is application/problem+json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/problem+json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"The object has been successfully deleted\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.have.property('type');\r",
+									"    pm.expect(responseData).to.have.property('title');\r",
+									"    pm.expect(responseData).to.have.property('status');\r",
+									"    pm.expect(responseData).to.have.property('traceId');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:5044/api/Order/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "USER-DONT-EXIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test: Usuario no autorizado\r",
+									"pm.test(\"User Unauthorized. This page no exist\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    console.log(\"Status code is 404 - User is unauthorized.\");\r",
+									"});\r",
+									"\r",
+									"// Test para verificar que los campos están vacíos y la respuesta es la esperada (error 400)\r",
+									"pm.test(\"Fields are empty\", function () {\r",
+									"    pm.response.to.have.status(404);  // Esperamos un código de estado 400 por la solicitud incorrecta\r",
+									"    \r",
+									"    console.log(\"Test Passed: Fields are empty, expecting error response\");\r",
+									"});\r",
+									"\r",
+									"// Test: Login falla con contraseña faltante\r",
+									"pm.test(\"Login fails with missing password\", function () {\r",
+									"    pm.response.to.have.status(404);  // Verificar que el código de estado sea 404\r",
+									"\r",
+									"    // Intentar obtener el contenido de la respuesta como texto\r",
+									"    const responseText = pm.response.text();\r",
+									"\r",
+									"    // Si la respuesta está vacía, mostrar mensaje y terminar el test\r",
+									"    if (!responseText==\"\") {\r",
+									"        console.log(\"Response body is empty - No error message returned by server.\");\r",
+									"        pm.expect.fail(\"Response body is empty. No error message provided by server.\");\r",
+									"        return;  // Salir del test si la respuesta está vacía\r",
+									"    }\r",
+									"\r",
+									"    // Si la respuesta no está vacía, intentar analizarla como JSON\r",
+									"    let responseData;\r",
+									"    try {\r",
+									"        responseData = pm.response.json();\r",
+									"    } catch (error) {\r",
+									"        console.log(\"Response is not in JSON format.\");\r",
+									"        pm.expect.fail(\"Response is not JSON. Test cannot proceed.\");\r",
+									"        return;  // Salir si la respuesta no es JSON\r",
+									"    }\r",
+									"\r",
+									"    // Verificar que el campo de error esté presente en el JSON\r",
+									"    pm.expect(responseData).to.have.property(\"error\"); // Ajustar según el nombre exacto del campo de error\r",
+									"    console.log(\"Error message:\", responseData.error);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"testusers\",\r\n  \"password\": \"passwords\"\r\n}\r\n{\r\n  \"username\": \"\",\r\n  \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5044/api/User/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "USER EXIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required field 'token'\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.have.property('token');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Token is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.token).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Content-Type header is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Token is not null or undefined\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.token).to.not.be.null;",
+									"    pm.expect(responseData.token).to.not.be.undefined;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Token is not expired\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.token).to.exist;",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Token is securely generated\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.token).to.be.a('string').and.to.have.lengthOf.at.least(1);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"testuser\",\r\n  \"password\": \"password\"\r\n}"
+						},
+						"url": "http://localhost:5044/api/User/login"
+					},
+					"response": [
+						{
+							"name": "http://localhost:5044/api/User/loginUserandPasswordCorrect",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"testuser\",\r\n  \"password\": \"password\"\r\n}"
+								},
+								"url": "http://localhost:5044/api/User/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Nov 2024 13:42:11 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"sampletoken\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

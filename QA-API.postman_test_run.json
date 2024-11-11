@@ -1,0 +1,590 @@
+{
+	"id": "e497d872-ad52-413e-8cc7-c77f35114444",
+	"name": "QA-API",
+	"timestamp": "2024-11-10T21:59:46.152Z",
+	"collection_id": "39617158-59c686be-feb8-4773-8a2a-2bf8dcb2b868",
+	"folder_id": 0,
+	"environment_id": "39617158-3f0b4d15-93c0-4560-8c09-3794063f36ab",
+	"totalPass": 45,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-11-10T21:59:22.163Z",
+	"totalFail": 8,
+	"results": [
+		{
+			"id": "42b5469b-3381-4c29-931e-5e418b4e63f1",
+			"name": "CREATE-PRODUCT",
+			"url": "http://localhost:5044/api/Product",
+			"time": 595,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful response": true,
+				"Response status code is 200": true,
+				"Response time is less than 200ms": false,
+				"Content type is application/json": true,
+				"Response schema is valid": true,
+				"Response has the required fields": false
+			},
+			"testPassFailCounts": {
+				"Successful response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 200ms": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Content type is application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has the required fields": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				595
+			],
+			"allTests": [
+				{
+					"Successful response": true,
+					"Response status code is 200": true,
+					"Response time is less than 200ms": false,
+					"Content type is application/json": true,
+					"Response schema is valid": true,
+					"Response has the required fields": false
+				}
+			]
+		},
+		{
+			"id": "6ebaa2be-3c98-4c51-a693-c87540b67edb",
+			"name": "ADD-PRODUCT",
+			"url": "http://localhost:5044/api/Product",
+			"time": 553,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response status code is 201": true,
+				"Response time is less than 500ms": false,
+				"Response has the required fields - id, name, and price": true,
+				"Id is a non-negative integer": true,
+				"Name is a non-empty string": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response status code is 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 500ms": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response has the required fields - id, name, and price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Id is a non-negative integer": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Name is a non-empty string": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				553
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response status code is 201": true,
+					"Response time is less than 500ms": false,
+					"Response has the required fields - id, name, and price": true,
+					"Id is a non-negative integer": true,
+					"Name is a non-empty string": true
+				}
+			]
+		},
+		{
+			"id": "b0f6ed1e-4d03-40c9-ba20-499a0f2a384c",
+			"name": "PUT-PRODUCT-BY-ID",
+			"url": "http://localhost:5044/api/Product/1",
+			"time": 1,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response status code is 204": true,
+				"Response time is less than 300ms": true,
+				"Response body schema is as expected": true,
+				"The product has the correct ID ": true,
+				"Response data length must be 0": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response status code is 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 300ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body schema is as expected": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The product has the correct ID ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response data length must be 0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response status code is 204": true,
+					"Response time is less than 300ms": true,
+					"Response body schema is as expected": true,
+					"The product has the correct ID ": true,
+					"Response data length must be 0": true
+				}
+			]
+		},
+		{
+			"id": "b061790b-03b4-42e1-b098-f3e10c2e944e",
+			"name": "DELETE-PRODUCT",
+			"url": "http://localhost:5044/api/Product/1\n",
+			"time": 2,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Verify that the DELETE request was successful": false,
+				"Response successful 200ms": true,
+				"Response has the required fields": false,
+				"Content type is application/problem+json": false,
+				"Response schema matches the expected schema": false
+			},
+			"testPassFailCounts": {
+				"Verify that the DELETE request was successful": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response successful 200ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has the required fields": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Content type is application/problem+json": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response schema matches the expected schema": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Verify that the DELETE request was successful": false,
+					"Response successful 200ms": true,
+					"Response has the required fields": false,
+					"Content type is application/problem+json": false,
+					"Response schema matches the expected schema": false
+				}
+			]
+		},
+		{
+			"id": "427cc010-65ec-4082-a224-b1b8e04b7cda",
+			"name": "CREATE-ORDER",
+			"url": "http://localhost:5044/api/Order",
+			"time": 3,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response status code is 200": true,
+				"Response has the correct content type - application/json": true,
+				"Response is an array": true,
+				"Response time is within an acceptable range": true,
+				"Array schema is as expected": true
+			},
+			"testPassFailCounts": {
+				"Response status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has the correct content type - application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is within an acceptable range": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Array schema is as expected": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3
+			],
+			"allTests": [
+				{
+					"Response status code is 200": true,
+					"Response has the correct content type - application/json": true,
+					"Response is an array": true,
+					"Response time is within an acceptable range": true,
+					"Array schema is as expected": true
+				}
+			]
+		},
+		{
+			"id": "60931c19-7a7c-4ffd-945a-37bae2c16984",
+			"name": "ADD-ORDER",
+			"url": "http://localhost:5044/api/Order\n",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"There is no answer or what you are looking for does not exist.": true,
+				"Response body is null": true,
+				"Response time is less than 500ms": true,
+				"The desired order exists - Puzzle": true,
+				"The desired order exists - Pizza": true,
+				"Exist the order - Legos": true,
+				"Order does not exist": true
+			},
+			"testPassFailCounts": {
+				"There is no answer or what you are looking for does not exist.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is null": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 500ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The desired order exists - Puzzle": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The desired order exists - Pizza": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Exist the order - Legos": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order does not exist": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"There is no answer or what you are looking for does not exist.": true,
+					"Response body is null": true,
+					"Response time is less than 500ms": true,
+					"The desired order exists - Puzzle": true,
+					"The desired order exists - Pizza": true,
+					"Exist the order - Legos": true,
+					"Order does not exist": true
+				}
+			]
+		},
+		{
+			"id": "38fff9a4-9ab3-4667-82f7-a9a7fd58b2c8",
+			"name": "PUT-ORDER",
+			"url": "http://localhost:5044/api/Order/2\n\n",
+			"time": 558,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"There is no answer or what you are looking for does not exist.": true,
+				"Response time is less than 500ms": true,
+				"There are empty orders": true
+			},
+			"testPassFailCounts": {
+				"There is no answer or what you are looking for does not exist.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 500ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"There are empty orders": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				558
+			],
+			"allTests": [
+				{
+					"There is no answer or what you are looking for does not exist.": true,
+					"Response time is less than 500ms": true,
+					"There are empty orders": true
+				}
+			]
+		},
+		{
+			"id": "3db0ee15-d817-4ba9-a8e8-8a59fbb1ce24",
+			"name": "DELETE-ORDER",
+			"url": "http://localhost:5044/api/Order/2",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Verify that the DELETE request was successful": true,
+				"Response successful 200ms": true,
+				"Response has the required fields": true,
+				"Content type is application/problem+json": true,
+				"The object has been successfully deleted": true
+			},
+			"testPassFailCounts": {
+				"Verify that the DELETE request was successful": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response successful 200ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has the required fields": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content type is application/problem+json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"The object has been successfully deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Verify that the DELETE request was successful": true,
+					"Response successful 200ms": true,
+					"Response has the required fields": true,
+					"Content type is application/problem+json": true,
+					"The object has been successfully deleted": true
+				}
+			]
+		},
+		{
+			"id": "ae5bb4a3-b1f7-4ce8-8fdd-f0ecde6e295e",
+			"name": "USER-DONT-EXIST",
+			"url": "http://localhost:5044/api/User/login\n",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"User Unauthorized. This page no exist": true,
+				"Fields are empty": true,
+				"Login fails with missing password": false
+			},
+			"testPassFailCounts": {
+				"User Unauthorized. This page no exist": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Fields are empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Login fails with missing password": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"User Unauthorized. This page no exist": true,
+					"Fields are empty": true,
+					"Login fails with missing password": false
+				}
+			]
+		},
+		{
+			"id": "96bf5844-d231-4edb-903b-0e54caf72f0a",
+			"name": "USER EXIST",
+			"url": "http://localhost:5044/api/User/login",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response status code is 200": true,
+				"Response has the required field 'token'": true,
+				"Token is a non-empty string": true,
+				"Content-Type header is application/json": true,
+				"Token is not null or undefined": true,
+				"Token is not expired": true,
+				"Token is securely generated": true
+			},
+			"testPassFailCounts": {
+				"Response status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has the required field 'token'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is a non-empty string": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type header is application/json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is not null or undefined": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is not expired": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Token is securely generated": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Response status code is 200": true,
+					"Response has the required field 'token'": true,
+					"Token is a non-empty string": true,
+					"Content-Type header is application/json": true,
+					"Token is not null or undefined": true,
+					"Token is not expired": true,
+					"Token is securely generated": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1720,
+	"collection": {
+		"requests": [
+			{
+				"id": "42b5469b-3381-4c29-931e-5e418b4e63f1",
+				"method": "GET"
+			},
+			{
+				"id": "6ebaa2be-3c98-4c51-a693-c87540b67edb",
+				"method": "POST"
+			},
+			{
+				"id": "b0f6ed1e-4d03-40c9-ba20-499a0f2a384c",
+				"method": "PUT"
+			},
+			{
+				"id": "b061790b-03b4-42e1-b098-f3e10c2e944e",
+				"method": "DELETE"
+			},
+			{
+				"id": "427cc010-65ec-4082-a224-b1b8e04b7cda",
+				"method": "GET"
+			},
+			{
+				"id": "60931c19-7a7c-4ffd-945a-37bae2c16984",
+				"method": "POST"
+			},
+			{
+				"id": "38fff9a4-9ab3-4667-82f7-a9a7fd58b2c8",
+				"method": "PUT"
+			},
+			{
+				"id": "3db0ee15-d817-4ba9-a8e8-8a59fbb1ce24",
+				"method": "DELETE"
+			},
+			{
+				"id": "ae5bb4a3-b1f7-4ce8-8fdd-f0ecde6e295e",
+				"method": "GET"
+			},
+			{
+				"id": "96bf5844-d231-4edb-903b-0e54caf72f0a",
+				"method": "POST"
+			}
+		]
+	}
+}
